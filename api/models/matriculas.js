@@ -1,10 +1,19 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const matriculas = sequelize.define('matriculas', {
-    status: DataTypes.STRING
-  }, {});
-  matriculas.associate = function(models) {
-    // associations can be defined here
+  const Matriculas = sequelize.define(
+    "Matriculas",
+    {
+      status: DataTypes.STRING,
+    },
+    {}
+  );
+  Matriculas.associate = function (models) {
+    Matriculas.belongsTo(models.Pessoas, {
+      foreignKey: "estudante_id",
+    });
+    Matriculas.belongsTo(models.Turmas, {
+      foreignKey: "turma_id",
+    });
   };
-  return matriculas;
+  return Matriculas;
 };
